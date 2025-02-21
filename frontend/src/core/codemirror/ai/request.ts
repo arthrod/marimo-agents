@@ -40,7 +40,7 @@ ${opts.codeAfter}
         code: codeWithReplacement,
         selectedText: opts.selection,
         includeOtherCode: "",
-        language: opts.language,
+        language: opts.language === "agent" ? "python" : opts.language,
       } satisfies AiCompletionRequest),
     },
   );

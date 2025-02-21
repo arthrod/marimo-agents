@@ -25,6 +25,7 @@ __all__ = [
     "current_thread",
     # Other namespaces
     "ai",
+    "editor",
     "ui",
     "islands",
     # Application elements
@@ -88,6 +89,7 @@ __all__ = [
     "watch",
     "__version__",
 ]
+
 import marimo._ai as ai
 import marimo._islands as islands
 import marimo._runtime.watch as watch
@@ -126,7 +128,7 @@ from marimo._plugins.stateless.style import style
 from marimo._plugins.stateless.tabs import tabs
 from marimo._plugins.stateless.tree import tree
 from marimo._plugins.stateless.video import video
-from marimo._runtime import output
+from marimo._runtime import editor, output
 from marimo._runtime.capture import (
     capture_stderr,
     capture_stdout,

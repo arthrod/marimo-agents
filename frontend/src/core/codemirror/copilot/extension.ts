@@ -145,7 +145,11 @@ export const copilotBundle = (config: CompletionConfig): Extension => {
           const language = state.field(languageAdapterState).type;
           let res = await API.post<AiInlineCompletionRequest, string>(
             "/ai/inline_completion",
-            { prefix, suffix, language },
+            {
+              prefix,
+              suffix,
+              language: language === "agent" ? "python" : language,
+            },
           );
 
           // If we are at a new position, ignore the response

@@ -1,7 +1,7 @@
 /* Copyright 2024 Marimo. All rights reserved. */
 
 import type { EditorView } from "@codemirror/view";
-import { DatabaseIcon } from "lucide-react";
+import { BotIcon, DatabaseIcon } from "lucide-react";
 import type React from "react";
 import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
@@ -31,6 +31,10 @@ export const LanguageToggles: React.FC<LanguageTogglesProps> = ({
   );
   const canUseSQL = useMemo(
     () => LanguageAdapters.sql.isSupported(code) || code.trim() === "",
+    [code],
+  );
+  const canUseAgent = useMemo(
+    () => LanguageAdapters.agent.isSupported(code) || code.trim() === "",
     [code],
   );
 
@@ -82,6 +86,21 @@ export const LanguageToggles: React.FC<LanguageTogglesProps> = ({
         toType="python"
         displayName="Python"
         onAfterToggle={Functions.NOOP}
+      />
+      <LanguageToggle
+        editorView={editorView}
+        currentLanguageAdapter={currentLanguageAdapter}
+        canSwitchToLanguage={canUseAgent && currentLanguageAdapter === "python"}
+        icon={
+          <BotIcon
+            color={"var(--sky-11)"}
+            strokeWidth={2.5}
+            className="w-4 h-4"
+          />
+        }
+        toType="agent"
+        displayName="Agent"
+        onAfterToggle={onAfterToggle}
       />
     </div>
   );

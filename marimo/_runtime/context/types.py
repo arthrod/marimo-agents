@@ -29,6 +29,7 @@ if TYPE_CHECKING:
     from marimo._runtime import dataflow
     from marimo._runtime.cell_lifecycle_registry import CellLifecycleRegistry
     from marimo._runtime.functions import FunctionRegistry
+    from marimo._runtime.agents import AgentRegistry
     from marimo._runtime.params import CLIArgs, QueryParams
     from marimo._runtime.requests import HTTPRequest
     from marimo._runtime.state import State, StateRegistry
@@ -73,6 +74,7 @@ class ExecutionContext:
 class RuntimeContext(abc.ABC):
     ui_element_registry: UIElementRegistry
     state_registry: StateRegistry
+    agent_registry: AgentRegistry
     function_registry: FunctionRegistry
     cell_lifecycle_registry: CellLifecycleRegistry
     virtual_file_registry: VirtualFileRegistry

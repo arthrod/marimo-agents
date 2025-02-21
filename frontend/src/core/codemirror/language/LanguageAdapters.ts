@@ -5,11 +5,14 @@ import { MarkdownLanguageAdapter } from "./languages/markdown";
 import { PythonLanguageAdapter } from "./languages/python";
 import { SQLLanguageAdapter } from "./languages/sql/sql";
 import type { LanguageAdapter, LanguageAdapterType } from "./types";
+import { AIAgentLanguageAdapter } from "./ai";
+
 
 // Create cached instances
 const createPythonAdapter = once(() => new PythonLanguageAdapter());
 const createMarkdownAdapter = once(() => new MarkdownLanguageAdapter());
 const createSqlAdapter = once(() => new SQLLanguageAdapter());
+const createAgentAdapter = once(() => new AIAgentLanguageAdapter());
 
 export const LanguageAdapters: Record<LanguageAdapterType, LanguageAdapter> = {
   // Getters to prevent circular dependencies
@@ -21,6 +24,9 @@ export const LanguageAdapters: Record<LanguageAdapterType, LanguageAdapter> = {
   },
   get sql() {
     return createSqlAdapter();
+  },
+  get agent() {
+    return createAgentAdapter();
   },
 };
 

@@ -14,7 +14,7 @@
     "./providers.json": "./data/generated/providers.json"
   },
   "scripts": {
-    "codegen": "node --experimental-transform-types src/generate.ts",
+    "codegen": "npx tsx src/generate.ts",
     "test": "vitest",
     "build": "echo 'No build step'"
   },

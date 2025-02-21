@@ -7,6 +7,7 @@ import {
 } from "@dnd-kit/sortable";
 import { useAtomValue } from "jotai";
 import {
+  BotIcon,
   DatabaseIcon,
   SparklesIcon,
   SquareCodeIcon,
@@ -313,6 +314,32 @@ const AddCellButtons: React.FC<{
           <DatabaseIcon className="mr-2 size-4 shrink-0" />
           SQL
         </Button>
+        <Tooltip
+          content={
+            // aiEnabled ? null : <span>Enable via settings under AI Assist</span>
+            null
+          }
+          delayDuration={100}
+          asChild={false}
+        >
+          <Button
+            className={buttonClass}
+            variant="text"
+            size="sm"
+            // disabled={!aiEnabled}
+            onClick={() => {
+              maybeAddMarimoImport({ autoInstantiate: true, createNewCell });
+              createNewCell({
+                cellId: { type: "__end__", columnId },
+                before: false,
+                code: LanguageAdapters.agent.defaultCode,
+              });
+            }}
+          >
+            <BotIcon className="mr-2 size-4 flex-shrink-0" />
+            Chat
+          </Button>
+        </Tooltip>
         <Tooltip
           content={
             aiEnabled ? null : <span>Enable via settings under AI Assist</span>

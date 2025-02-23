@@ -58,6 +58,7 @@ import { isStaticNotebook } from "../static/static-state";
 import { useVariablesActions } from "../variables/state";
 import type { VariableName } from "../variables/types";
 import { WebSocketClosedReason, WebSocketState } from "./types";
+import { useSuggestionsActions } from "../suggestions/state";
 
 /**
  * WebSocket that connects to the Marimo kernel and handles incoming messages.
@@ -80,6 +81,7 @@ export function useMarimoWebSocket(opts: {
   const { addDatasets, filterDatasetsFromVariables } = useDatasetsActions();
   const { addDataSourceConnection, filterDataSourcesFromVariables } =
     useDataSourceActions();
+  const { setSuggestions } = useSuggestionsActions();
   const { setLayoutData } = useLayoutActions();
   const [connection, setConnection] = useAtom(connectionAtom);
   const { addBanner } = useBannersActions();
@@ -272,6 +274,9 @@ export function useMarimoWebSocket(opts: {
         return;
       case "update-cell-ids":
         setCellIds({ cellIds: msg.data.cell_ids as CellId[] });
+        return;
+      case "suggestions":
+        setSuggestions(msg.data.suggestions);
         return;
       default:
         logNever(msg.data);

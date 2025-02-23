@@ -3673,7 +3673,7 @@ export interface components {
             /** @enum {unknown} */
             data_type: "boolean" | "date" | "datetime" | "integer" | "number" | "string" | "time" | "unknown";
             error: components["schemas"]["SetupRootError"] | components["schemas"]["CycleError"] | components["schemas"]["MultipleDefinitionError"] | components["schemas"]["ImportStarError"] | components["schemas"]["MarimoAncestorStoppedError"] | components["schemas"]["MarimoAncestorPreventedError"] | components["schemas"]["MarimoExceptionRaisedError"] | components["schemas"]["MarimoStrictExecutionError"] | components["schemas"]["MarimoInterruptionError"] | components["schemas"]["MarimoSyntaxError"] | components["schemas"]["MarimoInternalError"] | components["schemas"]["MarimoSQLError"] | components["schemas"]["UnknownError"];
-            operation: components["schemas"]["CellOp"] | components["schemas"]["FunctionCallResult"] | components["schemas"]["SendUIElementMessage"] | components["schemas"]["RemoveUIElements"] | components["schemas"]["Reload"] | components["schemas"]["Reconnected"] | components["schemas"]["Interrupted"] | components["schemas"]["CompletedRun"] | components["schemas"]["KernelReady"] | components["schemas"]["CompletionResult"] | components["schemas"]["Alert"] | components["schemas"]["Banner"] | components["schemas"]["MissingPackageAlert"] | components["schemas"]["InstallingPackageAlert"] | components["schemas"]["StartupLogs"] | components["schemas"]["Variables"] | components["schemas"]["VariableValues"] | components["schemas"]["QueryParamsSet"] | components["schemas"]["QueryParamsAppend"] | components["schemas"]["QueryParamsDelete"] | components["schemas"]["QueryParamsClear"] | components["schemas"]["Datasets"] | components["schemas"]["DataColumnPreview"] | components["schemas"]["SQLTablePreview"] | components["schemas"]["SQLTableListPreview"] | components["schemas"]["DataSourceConnections"] | components["schemas"]["ValidateSQLResult"] | components["schemas"]["SecretKeysResult"] | components["schemas"]["FocusCell"] | components["schemas"]["UpdateCellCodes"] | components["schemas"]["UpdateCellIdsRequest"];
+            operation: components["schemas"]["CellOp"] | components["schemas"]["FunctionCallResult"] | components["schemas"]["SendUIElementMessage"] | components["schemas"]["RemoveUIElements"] | components["schemas"]["Reload"] | components["schemas"]["Reconnected"] | components["schemas"]["Interrupted"] | components["schemas"]["CompletedRun"] | components["schemas"]["KernelReady"] | components["schemas"]["CompletionResult"] | components["schemas"]["Alert"] | components["schemas"]["Banner"] | components["schemas"]["MissingPackageAlert"] | components["schemas"]["InstallingPackageAlert"] | components["schemas"]["StartupLogs"] | components["schemas"]["Suggestions"] | components["schemas"]["Variables"] | components["schemas"]["VariableValues"] | components["schemas"]["QueryParamsSet"] | components["schemas"]["QueryParamsAppend"] | components["schemas"]["QueryParamsDelete"] | components["schemas"]["QueryParamsClear"] | components["schemas"]["Datasets"] | components["schemas"]["DataColumnPreview"] | components["schemas"]["SQLTablePreview"] | components["schemas"]["SQLTableListPreview"] | components["schemas"]["DataSourceConnections"] | components["schemas"]["ValidateSQLResult"] | components["schemas"]["SecretKeysResult"] | components["schemas"]["FocusCell"] | components["schemas"]["UpdateCellCodes"] | components["schemas"]["UpdateCellIdsRequest"];
         };
         /**
          * LanguageServersConfig
@@ -4208,6 +4208,26 @@ export interface components {
             name: string;
             /** @enum {unknown} */
             provider: "dotenv" | "env";
+        };
+        /**
+         * Suggestion
+         * @description A suggestion for the user.
+         */
+        Suggestion: {
+            description: string;
+            id: string;
+            title: string;
+            /** @enum {string} */
+            type: "prompt_idea" | "prompt_warning";
+        };
+        /**
+         * Suggestions
+         * @description A list of suggestions for the user.
+         */
+        Suggestions: {
+            /** @enum {string} */
+            op: "suggestions";
+            suggestions: components["schemas"]["Suggestion"][];
         };
         /**
          * SendUIElementMessage

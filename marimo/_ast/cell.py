@@ -12,6 +12,7 @@ from typing import TYPE_CHECKING, Any, Literal, Optional
 import msgspec
 
 from marimo import _loggers
+from marimo._ast.agent_visitor import AgentVisitor
 from marimo._ast.parse import ast_parse
 from marimo._ast.sql_visitor import SQLRef, SQLVisitor
 from marimo._ast.visitor import ImportData, Language, Name, VariableData
@@ -229,6 +230,15 @@ class CellImpl:
         except Exception:
             return []
 
+    def _get_agent_visitor(self) -> AgentVisitor:
+        try:
+            visitor = AgentVisitor()
+            visitor.visit(ast.parse(self.code))
+            return visitor
+        except Exception:
+            # Return a default visitor if parsing fails
+            return AgentVisitor()
+
     @cached_property
     def sqls(self) -> list[str]:
         """Returns parsed SQL statements from this cell.
@@ -246,6 +256,24 @@ class CellImpl:
             list[str]: List of SQL statements verbatim from the cell code.
         """
         return self._get_sqls(raw=True)
+
+    @cached_property
+    def had_agent_run(self) -> bool:
+        """Returns whether this cell had an agent run.
+
+        Returns:
+            bool: True if the cell contains a call to mo.ai.run_agent, False otherwise.
+        """
+        return self._get_agent_visitor().has_agent_run
+
+    @cached_property
+    def agent_name(self) -> Optional[str]:
+        """Returns the name of the agent run in this cell.
+
+        Returns:
+            Optional[str]: The name of the agent if one was found, None otherwise.
+        """
+        return self._get_agent_visitor().get_agent_name()
 
     @property
     def stale(self) -> bool:

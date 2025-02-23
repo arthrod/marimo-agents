@@ -17,6 +17,7 @@ import {
   SquareDashedBottomCodeIcon,
   TextSearchIcon,
   XCircleIcon,
+  LightbulbIcon,
 } from "lucide-react";
 import { getFeatureFlag } from "@/core/config/feature-flag";
 import { isWasm } from "@/core/wasm/utils";
@@ -36,7 +37,8 @@ export type PanelType =
   | "chat"
   | "agents"
   | "secrets"
-  | "logs";
+  | "logs"
+  | "suggestions";
 
 export interface PanelDescriptor {
   type: PanelType;
@@ -132,6 +134,12 @@ export const PANELS: PanelDescriptor[] = [
     type: "scratchpad",
     Icon: NotebookPenIcon,
     tooltip: "Scratchpad",
+    position: "sidebar",
+  },
+  {
+    type: "suggestions",
+    Icon: LightbulbIcon,
+    tooltip: "View suggestions",
     position: "sidebar",
   },
   {

@@ -27,6 +27,7 @@ import { Minimap } from "./minimap";
 import { PanelsWrapper } from "./panels";
 import { createStorage } from "./storage";
 import { handleDragging } from "./utils";
+import { SuggestionsPanel } from "../panels/suggestions-panel";
 
 const LazyTerminal = React.lazy(() => import("@/components/terminal/terminal"));
 const LazyChatPanel = React.lazy(() => import("@/components/chat/chat-panel"));
@@ -176,6 +177,7 @@ export const AppChrome: React.FC<PropsWithChildren> = ({ children }) => {
             {selectedPanel === "logs" && <LazyLogsPanel />}
             {selectedPanel === "tracing" && <LazyTracingPanel />}
             {selectedPanel === "secrets" && <LazySecretsPanel />}
+            {selectedPanel === "suggestions" && <SuggestionsPanel />}
           </TooltipProvider>
         </Suspense>
       </div>

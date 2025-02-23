@@ -4,6 +4,7 @@ from __future__ import annotations
 import asyncio
 import contextlib
 import functools
+import inspect
 import io
 import signal
 import threading
@@ -689,7 +690,12 @@ class Runner:
                         run_result.accumulated_output = exc_ctx.output
                         LOGGER.debug("Running post_execution hooks in context")
                         for post_hook in self.post_execution_hooks:
-                            post_hook(cell, self, run_result)
+                            if inspect.iscoroutinefunction(
+                                post_hook
+                            ) or asyncio.iscoroutinefunction(post_hook):
+                                await post_hook(cell, self, run_result)
+                            else:
+                                post_hook(cell, self, run_result)
                 except KeyboardInterrupt:
                     LOGGER.error(
                         """
@@ -701,7 +707,12 @@ class Runner:
                 run_result = await self.run(cell_id)
                 LOGGER.debug("Running post_execution hooks out of context")
                 for post_hook in self.post_execution_hooks:
-                    post_hook(cell, self, run_result)
+                    if inspect.iscoroutinefunction(
+                        post_hook
+                    ) or asyncio.iscoroutinefunction(post_hook):
+                        await post_hook(cell, self, run_result)
+                    else:
+                        post_hook(cell, self, run_result)
 
         LOGGER.debug("Running on_finish hooks")
         for finish_hook in self.on_finish_hooks:

@@ -13,6 +13,7 @@ from types import ModuleType
 from typing import (
     Any,
     ClassVar,
+    List,
     Literal,
     Optional,
     Union,
@@ -23,6 +24,7 @@ import msgspec
 
 from marimo import _loggers as loggers
 from marimo._ast.app_config import _AppConfig
+from marimo._ai.agents import Suggestion
 from marimo._ast.cell import CellConfig, RuntimeStateType
 from marimo._ast.toplevel import TopLevelHints, TopLevelStatus
 from marimo._data.models import (
@@ -667,6 +669,10 @@ class FocusCell(Op, tag="focus-cell"):
     name: ClassVar[str] = "focus-cell"
     cell_id: CellId_t
 
+class Suggestions(Op, tag="suggestions"):
+    name: ClassVar[str] = "suggestions"
+    suggestions: List[Suggestion]
+
 
 class UpdateCellCodes(Op, tag="update-cell-codes"):
     name: ClassVar[str] = "update-cell-codes"
@@ -738,4 +744,6 @@ MessageOperation = Union[
     FocusCell,
     UpdateCellCodes,
     UpdateCellIdsRequest,
+    # Suggestions
+    Suggestions,
 ]

@@ -22,8 +22,8 @@ importers:
         specifier: ^20.17.16
         version: 20.17.16
       '@types/ws':
-        specifier: ^8.5.14
-        version: 8.5.14
+        specifier: ^8.18.0
+        version: 8.18.0
       jsonrpc-ws-proxy:
         specifier: ^0.0.5
         version: 0.0.5
@@ -37,8 +37,8 @@ importers:
         specifier: ^5.7.3
         version: 5.7.3
       ws:
-        specifier: ^8.18.0
-        version: 8.18.0
+        specifier: ^8.18.1
+        version: 8.18.1
 
 packages:
 
@@ -325,8 +325,8 @@ packages:
   '@types/node@20.17.16':
     resolution: {integrity: sha512-vOTpLduLkZXePLxHiHsBLp98mHGnl8RptV4YAO3HfKO5UHjDvySGbxKtpYfy8Sx5+WKcgc45qNreJJRVM3L6mw==}
 
-  '@types/ws@8.5.14':
-    resolution: {integrity: sha512-bd/YFLW+URhBzMXurx7lWByOu+xzU9+kb3RboOteXYDfW+tr+JZa99OyNmPINEGB/ahzKrEuc8rcv4gnpJmxTw==}
+  '@types/ws@8.18.0':
+    resolution: {integrity: sha512-8svvI3hMyvN0kKCJMvTJP/x6Y/EoQbepff882wL+Sn5QsXb3etnamgrJq4isrBxSJj5L2AuXcI0+bgkoAXGUJw==}
 
   ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==}
@@ -392,8 +392,8 @@ packages:
     resolution: {integrity: sha512-r2+uaWa05wvxNALv8rLegRCOlcopUDLYOd8kAHTAM8xpqBNK5TcMqFbGufxKF7YIWpBwcyfNaAIb724Un5e1eA==}
     hasBin: true
 
-  cross-spawn@7.0.3:
-    resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
+  cross-spawn@7.0.6:
+    resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
   debug@4.4.0:
@@ -687,8 +687,8 @@ packages:
       utf-8-validate:
         optional: true
 
-  ws@8.18.0:
-    resolution: {integrity: sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==}
+  ws@8.18.1:
+    resolution: {integrity: sha512-RKW2aJZMXeMxVpnZ6bck+RswznaxmzdULiBr6KY7XkTnW8uvt0iT9H5DkHUChXrc+uurzwa0rVI16n/Xzjdz1w==}
     engines: {node: '>=10.0.0'}
     peerDependencies:
       bufferutil: ^4.0.1
@@ -874,7 +874,7 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
-  '@types/ws@8.5.14':
+  '@types/ws@8.18.0':
     dependencies:
       '@types/node': 20.17.16
 
@@ -925,7 +925,7 @@ snapshots:
 
   copilot-node-server@1.41.0: {}
 
-  cross-spawn@7.0.3:
+  cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
       shebang-command: 2.0.0
@@ -977,7 +977,7 @@ snapshots:
 
   foreground-child@3.3.0:
     dependencies:
-      cross-spawn: 7.0.3
+      cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
   fsevents@2.3.3:
@@ -1224,4 +1224,4 @@ snapshots:
     dependencies:
       async-limiter: 1.0.1
 
-  ws@8.18.0: {}
+  ws@8.18.1: {}

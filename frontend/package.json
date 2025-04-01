@@ -114,7 +114,7 @@
     "mermaid": "^11.4.1",
     "partysocket": "1.0.3",
     "path-to-regexp": "^8.2.0",
-    "plotly.js": "^2.35.3",
+    "plotly.js": "^3.0.1",
     "pyodide": "0.27.0",
     "react-arborist": "^3.4.0",
     "react-aria-components": "^1.6.0",

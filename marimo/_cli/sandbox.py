@@ -20,6 +20,7 @@ from marimo._config.settings import GLOBAL_SETTINGS
 from marimo._dependencies.dependencies import DependencyManager
 from marimo._utils.scripts import read_pyproject_from_script
 from marimo._utils.versions import is_editable
+from security import safe_command
 
 LOGGER = _loggers.marimo_logger()
 
@@ -345,7 +346,7 @@ def run_in_sandbox(
     env = os.environ.copy()
     env["MARIMO_MANAGE_SCRIPT_METADATA"] = "true"
 
-    process = subprocess.Popen(uv_cmd, env=env)
+    process = safe_command.run(subprocess.Popen, uv_cmd, env=env)
 
     def handler(sig: int, frame: Any) -> None:
         del sig

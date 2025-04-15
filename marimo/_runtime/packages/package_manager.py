@@ -10,6 +10,7 @@ from marimo import _loggers
 from marimo._dependencies.dependencies import DependencyManager
 from marimo._messaging.ops import Alert
 from marimo._runtime.packages.utils import append_version
+from security import safe_command
 
 LOGGER = _loggers.marimo_logger()
 
@@ -81,7 +82,7 @@ class PackageManager(abc.ABC):
     def run(self, command: list[str]) -> bool:
         if not self.is_manager_installed():
             return False
-        proc = subprocess.run(command)  # noqa: ASYNC101
+        proc = safe_command.run(subprocess.run, command)  # noqa: ASYNC101
         return proc.returncode == 0
 
     def update_notebook_script_metadata(

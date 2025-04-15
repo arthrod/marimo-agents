@@ -12,6 +12,7 @@ from marimo import _loggers
 from marimo._cli.print import green, muted, red
 from marimo._config.settings import GLOBAL_SETTINGS
 from marimo._utils.url import is_url
+from security import safe_command
 
 LOGGER = _loggers.marimo_logger()
 
@@ -165,8 +166,7 @@ def run_in_docker(
     echo(f"Running command: {muted(' '.join(docker_command))}")
     container_id = None
     try:
-        result = subprocess.run(
-            docker_command, check=True, capture_output=True, text=True
+        result = safe_command.run(subprocess.run, docker_command, check=True, capture_output=True, text=True
         )
         container_id = result.stdout.strip()
         echo(f"Container ID: {muted(container_id)}")
@@ -174,8 +174,7 @@ def run_in_docker(
 
         # Stream logs
         log_command = ["docker", "logs", "-f", container_id]
-        with subprocess.Popen(
-            log_command,
+        with safe_command.run(subprocess.Popen, log_command,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             universal_newlines=True,

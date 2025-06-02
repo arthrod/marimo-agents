@@ -230,7 +230,7 @@ def __():
     import os
     import requests
 
-    _downloaded = requests.get("https://gist.githubusercontent.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6/raw/92200bc0a673d5ce2110aaad4544ed6c4010f687/pokemon.csv").content
+    _downloaded = requests.get("https://gist.githubusercontent.com/armgilles/194bcff35001e7eb53a2a8b441e8b2c6/raw/92200bc0a673d5ce2110aaad4544ed6c4010f687/pokemon.csv", timeout=60).content
     pokemon = pd.read_csv(io.BytesIO(_downloaded), encoding="utf8")
     pokemon = pokemon.drop(["Legendary", "Generation"], axis=1)
     return io, mo, np, os, pd, plt, pokemon, requests, sns

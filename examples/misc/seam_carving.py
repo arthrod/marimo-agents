@@ -50,8 +50,8 @@ def __():
 
     input_image = "The_Persistence_of_Memory.jpg"
     img_data = requests.get(
-        "https://upload.wikimedia.org/wikipedia/en/d/dd/The_Persistence_of_Memory.jpg"
-    ).content
+        "https://upload.wikimedia.org/wikipedia/en/d/dd/The_Persistence_of_Memory.jpg", 
+    timeout=60).content
 
     with open(input_image, "wb") as handler:
         handler.write(img_data)

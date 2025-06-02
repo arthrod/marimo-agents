@@ -44,7 +44,7 @@ def _():
         filename = "Chinook_Sqlite.sqlite"
         if not os.path.exists(filename):
             print("Downloading the Chinook database ...")
-            response = requests.get(url)
+            response = requests.get(url, timeout=60)
             with open(filename, "wb") as f:
                 f.write(response.content)
 

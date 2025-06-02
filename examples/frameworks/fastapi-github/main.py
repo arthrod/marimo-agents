@@ -35,14 +35,14 @@ templates = Jinja2Templates(directory=templates_dir)
 def download_github_files(repo: str, path: str = "") -> list[tuple[str, str]]:
     """Download files from GitHub repo, returns list of (file_path, content)"""
     api_url = f"https://api.github.com/repos/{repo}/contents/{path}"
-    response = requests.get(api_url)
+    response = requests.get(api_url, timeout=60)
     response.raise_for_status()
 
     files: list[tuple[str, str]] = []
     for item in response.json():
         print(item)
         if item["type"] == "file" and item["name"].endswith(".py"):
-            content_response = requests.get(item["download_url"])
+            content_response = requests.get(item["download_url"], timeout=60)
             files.append(
                 (os.path.join(path, item["name"]), content_response.text)
             )

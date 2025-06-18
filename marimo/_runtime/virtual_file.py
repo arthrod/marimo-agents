@@ -4,7 +4,6 @@ from __future__ import annotations
 import base64
 import dataclasses
 import mimetypes
-import random
 import string
 import sys
 import threading
@@ -17,6 +16,7 @@ from marimo._runtime.context import ContextNotInitializedError
 from marimo._server.api.status import HTTPException, HTTPStatus
 from marimo._utils.data_uri import build_data_url
 from marimo._utils.platform import is_pyodide
+import secrets
 
 if TYPE_CHECKING:
     from collections.abc import Iterable
@@ -41,7 +41,7 @@ def random_filename(ext: str) -> str:
     except AttributeError:
         # get_native_id() not implemented in pyodide/WASM
         tid = "0"
-    basename = tid + "-" + "".join(random.choices(_ALPHABET, k=8))
+    basename = tid + "-" + "".join(secrets.SystemRandom().choices(_ALPHABET, k=8))
     return f"{basename}.{ext}"
 
 

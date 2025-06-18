@@ -7,6 +7,7 @@
 # Copyright 2024 Marimo. All rights reserved.
 
 import marimo
+import secrets
 
 __generated_with = "0.6.11"
 app = marimo.App()
@@ -39,7 +40,7 @@ def __(b, mo):
     mo.stop(not b.value)
 
     import random
-    random.randint(0, 1000)
+    secrets.SystemRandom().randint(0, 1000)
     return random,
 
 

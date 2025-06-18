@@ -1,6 +1,7 @@
 # Copyright 2024 Marimo. All rights reserved.
 
 import marimo
+import secrets
 
 __generated_with = "0.9.2"
 app = marimo.App()
@@ -138,16 +139,15 @@ def __(has_polars_installed):
 
 
     def _create_token_data(n_items=100):
-        import random
         import string
 
         def generate_random_string(length):
             letters = string.ascii_lowercase
-            result_str = "".join(random.choice(letters) for i in range(length))
+            result_str = "".join(secrets.choice(letters) for i in range(length))
             return result_str
 
         def generate_random_numbers(mean, std_dev, num_samples):
-            return [int(random.gauss(mean, std_dev)) for _ in range(num_samples)]
+            return [int(secrets.SystemRandom().gauss(mean, std_dev)) for _ in range(num_samples)]
 
         random_numbers = generate_random_numbers(50, 15, n_items)
         random_strings = sorted(

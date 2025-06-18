@@ -1,5 +1,6 @@
 # Copyright 2024 Marimo. All rights reserved.
 import marimo
+import secrets
 
 __generated_with = "0.4.11"
 app = marimo.App()
@@ -24,9 +25,9 @@ def __():
 
     def row(columns):
         return [
-            "".join(random.choices("abcdefghikjlmnopqrstuvwxyz", k=8)),
-            "".join(random.choices("abcdefghikjlmnopqrstuvwxyz", k=8)),
-        ] + [random.randint(1000, 100000) for i in range(columns - 2)]
+            "".join(secrets.SystemRandom().choices("abcdefghikjlmnopqrstuvwxyz", k=8)),
+            "".join(secrets.SystemRandom().choices("abcdefghikjlmnopqrstuvwxyz", k=8)),
+        ] + [secrets.SystemRandom().randint(1000, 100000) for i in range(columns - 2)]
     return random, row
 
 

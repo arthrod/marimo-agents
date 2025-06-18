@@ -10,6 +10,7 @@
 # ///
 
 import marimo
+import secrets
 
 __generated_with = "0.8.19"
 app = marimo.App()
@@ -45,7 +46,7 @@ def __():
     import matplotlib.pyplot as plt
 
     np.random.seed(1337)
-    random.seed(1337)
+    secrets.SystemRandom().seed(1337)
     return np, plt, random
 
 

@@ -4,7 +4,6 @@ from __future__ import annotations
 import abc
 import base64
 import copy
-import random
 import sys
 import types
 import uuid
@@ -35,6 +34,7 @@ from marimo._runtime.context import (
 )
 from marimo._runtime.functions import Function
 from marimo._types.ids import UIElementId
+import secrets
 
 if TYPE_CHECKING:
     from marimo._plugins.ui._impl.input import form as form_plugin
@@ -121,7 +121,7 @@ class UIElement(Html, Generic[S, T], metaclass=abc.ABCMeta):
     # This does mean that snapshotting exports in CI will produce
     # different object-ids. If this is a problem, we can allow a
     # fixed seed via an environment variable.
-    _random_seed = random.Random()
+    _random_seed = secrets.SystemRandom().Random()
 
     def __init__(
         self,

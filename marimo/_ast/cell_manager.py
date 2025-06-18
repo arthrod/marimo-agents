@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import functools
 import os
-import random
 import string
 import sys
 from typing import (
@@ -13,6 +12,7 @@ from typing import (
     Optional,
     TypeVar,
 )
+import secrets
 
 if sys.version_info < (3, 10):
     from typing_extensions import ParamSpec, TypeAlias
@@ -59,7 +59,7 @@ class CellManager:
         self._cell_data: dict[CellId_t, CellData] = {}
         self.prefix = prefix
         self.unparsable = False
-        self.random_seed = random.Random(42)
+        self.random_seed = secrets.SystemRandom().Random(42)
         self.seen_ids: set[CellId_t] = set()
 
     def create_cell_id(self) -> CellId_t:

@@ -10,6 +10,7 @@ from typing import TYPE_CHECKING, Any, Dict
 import click
 
 from marimo._cli.print import orange
+from security import safe_command
 
 if TYPE_CHECKING:
     import psutil
@@ -420,8 +421,7 @@ def inline_packages(name: str) -> None:
 
     click.echo(f"Inlining packages: {pypi_names}")
     click.echo(f"into script: {name}")
-    subprocess.run(
-        [
+    safe_command.run(subprocess.run, [
             "uv",
             "add",
             "--script",

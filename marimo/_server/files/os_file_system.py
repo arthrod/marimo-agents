@@ -13,6 +13,7 @@ from typing import List, Literal, Optional, Union
 from marimo import _loggers
 from marimo._server.files.file_system import FileSystem
 from marimo._server.models.files import FileDetailsResponse, FileInfo
+from security import safe_command
 
 LOGGER = _loggers.marimo_logger()
 
@@ -181,7 +182,7 @@ class OSFileSystem(FileSystem):
             if editor and not _is_terminal_editor(editor):
                 try:
                     # For GUI editors
-                    subprocess.run([editor, path])
+                    safe_command.run(subprocess.run, [editor, path])
                     return True
                 except Exception as e:
                     LOGGER.error(f"Error opening with EDITOR: {e}")
@@ -189,12 +190,12 @@ class OSFileSystem(FileSystem):
 
             # Use system default if no editor specified
             if platform.system() == "Darwin":  # macOS
-                subprocess.call(("open", path))
+                safe_command.run(subprocess.call, ("open", path))
             elif platform.system() == "Windows":  # Windows
                 # startfile only exists on Windows
                 os.startfile(path)  # type: ignore[attr-defined]
             else:  # Linux variants
-                subprocess.call(("xdg-open", path))
+                safe_command.run(subprocess.call, ("xdg-open", path))
             return True
         except Exception as e:
             LOGGER.error(f"Error opening file: {e}")

@@ -80,6 +80,7 @@ from marimo._utils.file_watcher import FileWatcherManager
 from marimo._utils.paths import import_files
 from marimo._utils.repr import format_repr
 from marimo._utils.typed_connection import TypedConnection
+from security import safe_command
 
 LOGGER = _loggers.marimo_logger()
 
@@ -1156,8 +1157,7 @@ class LspServer:
 
             cmd = f"node {lsp_bin} --port {self.port}"
             LOGGER.debug("... running command: %s", cmd)
-            self.process = subprocess.Popen(
-                cmd.split(),
+            self.process = safe_command.run(subprocess.Popen, cmd.split(),
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
                 stdin=subprocess.DEVNULL,

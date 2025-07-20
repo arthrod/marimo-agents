@@ -8,6 +8,7 @@ from typing import Dict
 from marimo import _loggers
 from marimo._dependencies.dependencies import DependencyManager
 from marimo._types.ids import CellId_t
+from security import safe_command
 
 LOGGER = _loggers.marimo_logger()
 
@@ -17,7 +18,7 @@ CellCodes = Dict[CellId_t, str]
 
 def ruff(codes: CellCodes, *cmd: str) -> CellCodes:
     ruff_cmd = [sys.executable, "-m", "ruff"]
-    process = subprocess.run([*ruff_cmd, "--help"], capture_output=True)
+    process = safe_command.run(subprocess.run, [*ruff_cmd, "--help"], capture_output=True)
     if process.returncode != 0:
         LOGGER.warning(
             "To enable code formatting, install ruff (pip install ruff)"
@@ -27,8 +28,7 @@ def ruff(codes: CellCodes, *cmd: str) -> CellCodes:
     formatted_codes: CellCodes = {}
     for key, code in codes.items():
         try:
-            process = subprocess.run(
-                [
+            process = safe_command.run(subprocess.run, [
                     *ruff_cmd,
                     *cmd,
                     "-",

@@ -5,6 +5,7 @@ import subprocess
 from typing import Any, Dict
 
 from hatchling.builders.hooks.plugin.interface import BuildHookInterface
+from security import safe_command
 
 
 class FrontendBuildHook(BuildHookInterface[Any]):
@@ -37,8 +38,7 @@ class FrontendBuildHook(BuildHookInterface[Any]):
 
     def _check_binary(self, binary: str, display_name: str) -> None:
         try:
-            subprocess.run(
-                [binary, "--version"],
+            safe_command.run(subprocess.run, [binary, "--version"],
                 check=True,
                 capture_output=True,
                 text=True,

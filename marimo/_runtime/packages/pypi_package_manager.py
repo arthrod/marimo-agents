@@ -15,6 +15,7 @@ from marimo._runtime.packages.package_manager import (
 )
 from marimo._runtime.packages.utils import split_packages
 from marimo._utils.platform import is_pyodide
+from security import safe_command
 
 PY_EXE = sys.executable
 
@@ -28,7 +29,7 @@ class PypiPackageManager(CanonicalizingPackageManager):
     ) -> List[PackageDescription]:
         if not self.is_manager_installed():
             return []
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        proc = safe_command.run(subprocess.run, cmd, capture_output=True, text=True)
         if proc.returncode != 0:
             return []
         try:
@@ -236,7 +237,7 @@ class PoetryPackageManager(PypiPackageManager):
     ) -> List[PackageDescription]:
         if not self.is_manager_installed():
             return []
-        proc = subprocess.run(cmd, capture_output=True, text=True)
+        proc = safe_command.run(subprocess.run, cmd, capture_output=True, text=True)
         if proc.returncode != 0:
             return []
 

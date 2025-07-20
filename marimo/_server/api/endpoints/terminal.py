@@ -13,6 +13,7 @@ from marimo import _loggers
 from marimo._server.api.deps import AppState
 from marimo._server.model import SessionMode
 from marimo._server.router import APIRouter
+from security import safe_command
 
 LOGGER = _loggers.marimo_logger()
 
@@ -91,7 +92,7 @@ async def websocket_endpoint(websocket: WebSocket) -> None:
     child_pid, fd = pty.fork()
     if child_pid == 0:
         default_shell = os.environ.get("SHELL", "/bin/bash")
-        subprocess.run([default_shell], shell=True)  # noqa: ASYNC221
+        safe_command.run(subprocess.run, [default_shell], shell=True)  # noqa: ASYNC221
         return
 
     reader_task = asyncio.create_task(_read_from_pty(fd, websocket))

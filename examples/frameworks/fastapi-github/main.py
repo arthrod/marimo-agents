@@ -16,8 +16,8 @@ from fastapi.templating import Jinja2Templates
 import marimo
 import os
 import logging
-import requests
 from pathlib import Path
+from security import safe_requests
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -35,14 +35,14 @@ templates = Jinja2Templates(directory=templates_dir)
 def download_github_files(repo: str, path: str = "") -> list[tuple[str, str]]:
     """Download files from GitHub repo, returns list of (file_path, content)"""
     api_url = f"https://api.github.com/repos/{repo}/contents/{path}"
-    response = requests.get(api_url)
+    response = safe_requests.get(api_url)
     response.raise_for_status()
 
     files: list[tuple[str, str]] = []
     for item in response.json():
         print(item)
         if item["type"] == "file" and item["name"].endswith(".py"):
-            content_response = requests.get(item["download_url"])
+            content_response = safe_requests.get(item["download_url"])
             files.append(
                 (os.path.join(path, item["name"]), content_response.text)
             )

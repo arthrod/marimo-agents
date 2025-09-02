@@ -127,7 +127,7 @@
     "react-plotly.js": "^2.6.0",
     "react-resizable-panels": "2.1.7",
     "react-use-event-hook": "^0.9.6",
-    "react-vega": "^7.6.0",
+    "react-vega": "^8.0.0",
     "react-virtuoso": "^4.12.3",
     "reactflow": "^11.11.4",
     "rpc-anywhere": "^1.7.0",

@@ -17,7 +17,7 @@
     "./unstable_internal/*": "./src/*"
   },
   "dependencies": {
-    "@ai-sdk/react": "^2.0.30",
+    "@ai-sdk/react": "^2.0.52",
     "@anywidget/types": "^0.2.0",
     "@codemirror/autocomplete": "^6.18.7",
     "@codemirror/commands": "^6.8.1",
@@ -107,7 +107,7 @@
     "@xterm/addon-web-links": "^0.11.0",
     "@xterm/xterm": "^5.5.0",
     "@zed-industries/agent-client-protocol": "^0.3.1",
-    "ai": "^5.0.30",
+    "ai": "^5.0.52",
     "ansi_up": "^6.0.6",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -132,7 +132,7 @@
     "lucide-react": "^0.542.0",
     "lz-string": "^1.5.0",
     "marked": "^15.0.12",
-    "mermaid": "^11.10.1",
+    "mermaid": "^11.12.1",
     "partysocket": "1.1.5",
     "path-to-regexp": "^8.3.0",
     "plotly.js": "^2.35.3",
